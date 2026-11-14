@@ -17,11 +17,10 @@ jobs:
       with:
         ndk-version: r26b
 
-    # 核心修复：用 git clone 替代 curl，保证拉取到正确的头文件
+    # 核心修复：用 curl 强拽原版头文件，绝对不搞验证
     - name: Download Zygisk API
       run: |
-        git clone --depth 1 https://github.com/Dr-TSNG/Zygisk-API.git temp_api
-        cp temp_api/include/zygisk.hpp jni/
+        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/Dr-TSNG/Zygisk-API/master/include/zygisk.hpp
 
     - name: Build Native Module
       run: |
