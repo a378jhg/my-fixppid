@@ -17,10 +17,10 @@ jobs:
       with:
         ndk-version: r26b
 
-    # 核心修复：用 curl 强拽原版头文件，绝对不搞验证
+    # 核心修复：链接从 master 改成了 main，这下绝对能下下来了
     - name: Download Zygisk API
       run: |
-        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/Dr-TSNG/Zygisk-API/master/include/zygisk.hpp
+        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/Dr-TSNG/Zygisk-API/main/include/zygisk.hpp
 
     - name: Build Native Module
       run: |
