@@ -1,14 +1,9 @@
 #pragma once
 #include <jni.h>
-#include <sys/types.h>
 
 namespace zygisk {
-    struct Api {
-        void *impl;
-    };
-    struct AppSpecializeArgs {
-        jstring nice_name;
-    };
+    struct Api { void *impl; };
+    struct AppSpecializeArgs { jstring nice_name; };
     struct ServerSpecializeArgs {};
     class ModuleBase {
     public:
@@ -20,9 +15,12 @@ namespace zygisk {
     };
 }
 
+// 补上漏掉的变量声明
+extern void* zygisk_module_entry_ptr;
+
 #define REGISTER_ZYGISK_MODULE(clazz) \
+    static clazz instance; \
     extern "C" [[gnu::visibility("default")]] void zygisk_module_entry(zygisk::Api *api, JNIEnv *env) { \
-        static clazz instance; \
         instance.onLoad(api, env); \
         zygisk_module_entry_ptr = &instance; \
 }
