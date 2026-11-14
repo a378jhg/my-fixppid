@@ -12,11 +12,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 核心修复：把 NDK 降级到 r23b，完美兼容老版 Dobby 的汇编语法
     - name: Setup Android NDK
       uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r23b
+        ndk-version: r26b
 
     - name: Build Native Module
       run: |
