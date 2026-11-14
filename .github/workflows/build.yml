@@ -17,11 +17,6 @@ jobs:
       with:
         ndk-version: r26b
 
-    # 核心修复：从 LSPosed 官方仓库拉取绝对有效的 zygisk.hpp
-    - name: Download Zygisk API
-      run: |
-        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/LSPosed/LSPosed/master/zygisk/zygisk.hpp
-
     - name: Build Native Module
       run: |
         cd jni
