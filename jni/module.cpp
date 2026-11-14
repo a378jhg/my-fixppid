@@ -9,6 +9,9 @@
 #define LOG_TAG "PPIDSpoofer"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 
+// 补上变量的定义（解决报错的核心）
+void* zygisk_module_entry_ptr = nullptr; 
+
 static pid_t fake_getppid() {
     return 1000; 
 }
@@ -36,7 +39,6 @@ void inline_hook_getppid() {
 class PPIDSpooferModule : public zygisk::ModuleBase {
 public:
     void onLoad(zygisk::Api *api, JNIEnv *env) override {
-        this->api = api;
         this->env = env;
     }
 
@@ -51,7 +53,6 @@ public:
         }
     }
 private:
-    zygisk::Api *api;
     JNIEnv *env;
 };
 
