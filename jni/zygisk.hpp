@@ -3,7 +3,16 @@
 
 namespace zygisk {
     struct Api { void *impl; };
-    struct AppSpecializeArgs { jstring nice_name; };
+    struct AppSpecializeArgs {
+        jint uid;
+        jint gid;
+        jintArray gids;
+        jint runtime_flags;
+        jobjectArray rlimits;
+        jstring nice_name; // 关键：必须包含此项，否则读不到包名
+        jint mount_external;
+        jint se_info;
+    };
     struct ServerSpecializeArgs {};
     class ModuleBase {
     public:
@@ -15,7 +24,6 @@ namespace zygisk {
     };
 }
 
-// 补上漏掉的变量声明
 extern void* zygisk_module_entry_ptr;
 
 #define REGISTER_ZYGISK_MODULE(clazz) \
