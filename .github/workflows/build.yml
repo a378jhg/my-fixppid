@@ -22,10 +22,12 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
       with:
-        packages: 'platform-tools' # 显式指定，跳过已移除的 tools 包
+        packages: 'platform-tools'
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'  # 核心修复：强制使用 8.5 版本，避开新版报错
 
     - name: Build with Gradle
       run: gradle assembleRelease
