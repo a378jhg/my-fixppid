@@ -1,3 +1,4 @@
+#include <jni.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/mman.h>
@@ -42,7 +43,6 @@ public:
     void preAppSpecialize(zygisk::AppSpecializeArgs *args) override {
         const char* process = env->GetStringUTFChars(args->nice_name, nullptr);
         if (process) {
-            // 这里直接写死只对春秋生效
             if (strcmp(process, "com.chunqiunativecheck") == 0) {
                 LOGD("Hooking target: %s", process);
                 inline_hook_getppid();
@@ -55,4 +55,4 @@ private:
     JNIEnv *env;
 };
 
-REGISTER_ZYGISK_MODULE(PPIDSpooferModule);
+REGISTER_ZYGISK_MODULE(PPIDSpooferModule)
