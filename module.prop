@@ -1,0 +1,6 @@
+id=ppid_spoofer
+name=Advanced PPID Spoofer
+version=1.0
+versionCode=1
+author=You
+description=Configurable PID spoofer for targeted apps.
