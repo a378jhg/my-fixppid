@@ -2,7 +2,7 @@ name: Build Zygisk Module
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
@@ -17,10 +17,11 @@ jobs:
       with:
         ndk-version: r26b
 
-    # 核心修复：直接把 Zygisk API 头文件下载到 jni 目录
+    # 核心修复：用 git clone 替代 curl，保证拉取到正确的头文件
     - name: Download Zygisk API
       run: |
-        curl -L -o jni/zygisk.hpp https://raw.githubusercontent.com/Dr-TSNG/Zygisk-API/master/zygisk.hpp
+        git clone --depth 1 https://github.com/Dr-TSNG/Zygisk-API.git temp_api
+        cp temp_api/include/zygisk.hpp jni/
 
     - name: Build Native Module
       run: |
