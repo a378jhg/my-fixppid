@@ -17,10 +17,10 @@ jobs:
       with:
         ndk-version: r26b
 
-    # 核心修复：链接从 master 改成了 main，这下绝对能下下来了
+    # 核心修复：从 LSPosed 官方仓库拉取绝对有效的 zygisk.hpp
     - name: Download Zygisk API
       run: |
-        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/Dr-TSNG/Zygisk-API/main/include/zygisk.hpp
+        curl -L -f -o jni/zygisk.hpp https://raw.githubusercontent.com/LSPosed/LSPosed/master/zygisk/zygisk.hpp
 
     - name: Build Native Module
       run: |
