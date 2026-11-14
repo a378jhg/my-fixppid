@@ -24,10 +24,15 @@ jobs:
       with:
         packages: 'platform-tools'
 
+    # 核心修复：自动生成一个用于 Debug 签名的 KeyStore
+    - name: Generate Debug Keystore
+      run: |
+        keytool -genkey -v -keystore app/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        gradle-version: '8.5'  # 核心修复：强制使用 8.5 版本，避开新版报错
+        gradle-version: '8.5'
 
     - name: Build with Gradle
       run: gradle assembleRelease
