@@ -1,0 +1,3 @@
+# 格式：包名=伪装的PID
+com.chunqiunativecheck=1000
+com.eltavine.duckdetector=999
